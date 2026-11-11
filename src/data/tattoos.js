@@ -1,4 +1,4 @@
-// Catálogo de piezas de Efra Tattos
+// Catálogo de piezas de Aeterum Ink Tattoo
 export const initialTattoos = [
   {
     id: 1,

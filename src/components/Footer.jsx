@@ -22,7 +22,7 @@ export function Footer({ onOpenBooking, contactInfo }) {
             </div>
             <div>
               <span className="font-heading text-sm tracking-[0.2em] text-white font-bold block uppercase leading-tight">
-                EFRA TATTOS
+                AETERUM
               </span>
               <span className="text-[9px] tracking-[0.25em] text-silver-400 uppercase font-light block">
                 INK TATTOO
@@ -77,7 +77,7 @@ export function Footer({ onOpenBooking, contactInfo }) {
           {/* 3. WhatsApp Direct Contact */}
           <div className="lg:col-span-1">
             <a 
-              href={`https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hola Efra, vi tu página web y me interesa agendar una cita o cotizar un tatuaje.')}`}
+              href={`https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hola, vi la página web de Aeterum Ink Tattoo y me interesa agendar una cita o cotizar un tatuaje.')}`}
               target="_blank"
               rel="noopener noreferrer"
               className="group flex items-center gap-3 text-left"
@@ -131,11 +131,11 @@ export function Footer({ onOpenBooking, contactInfo }) {
           </div>
 
           <p className="font-heading text-xs sm:text-sm tracking-[0.25em] text-silver-400 uppercase font-light">
-            EFRA TATTOS <span className="mx-2 text-white/30">•</span> <span className="font-cormorant italic lowercase tracking-wider text-sm sm:text-base text-silver-300">Arte eterno, en manos expertas.</span>
+            AETERUM INK TATTOO <span className="mx-2 text-white/30">•</span> <span className="font-cormorant italic lowercase tracking-wider text-sm sm:text-base text-silver-300">Arte eterno, en manos expertas.</span>
           </p>
 
           <p className="text-[10px] text-silver-400 tracking-wider font-light">
-            © {currentYear} Efra Tattos. Todos los derechos reservados. Diseñado para artistas y clientes que buscan la excelencia.
+            © {currentYear} Aeterum Ink Tattoo. Todos los derechos reservados. Diseñado para artistas y clientes que buscan la excelencia.
           </p>
         </div>
 

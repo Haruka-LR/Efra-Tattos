@@ -18,21 +18,21 @@ import { MessageCircle, Phone, Calendar, Image as ImageIcon, Sparkles } from 'lu
 export default function App() {
   // Contact Information state (customizable via Admin Panel)
   const [contactInfo, setContactInfo] = useState(() => {
-    const saved = localStorage.getItem('efra_tattos_contact');
+    const saved = localStorage.getItem('aeterum_contact') || localStorage.getItem('efra_tattos_contact');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { }
     }
     return {
       whatsapp: '+52 779 172 8192',
       callPhone: '+52 779 172 8192',
-      email: 'contacto@efratattoos.com',
+      email: 'contacto@aeterumtattoos.com',
       location: 'Tizayuca, Hgo.',
     };
   });
 
   // Appointments state with persistence in localStorage
   const [appointments, setAppointments] = useState(() => {
-    const saved = localStorage.getItem('efra_tattos_appointments');
+    const saved = localStorage.getItem('aeterum_appointments') || localStorage.getItem('efra_tattos_appointments');
     if (saved) {
       try { return JSON.parse(saved); } catch (e) { }
     }
@@ -50,12 +50,12 @@ export default function App() {
 
   // Save appointments changes to localStorage
   useEffect(() => {
-    localStorage.setItem('efra_tattos_appointments', JSON.stringify(appointments));
+    localStorage.setItem('aeterum_appointments', JSON.stringify(appointments));
   }, [appointments]);
 
   // Save contactInfo changes to localStorage
   useEffect(() => {
-    localStorage.setItem('efra_tattos_contact', JSON.stringify(contactInfo));
+    localStorage.setItem('aeterum_contact', JSON.stringify(contactInfo));
   }, [contactInfo]);
 
   // Appointment actions
@@ -151,7 +151,7 @@ export default function App() {
 
           {/* Quick WhatsApp */}
           <a
-            href={`https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hola Efra, te contacto desde tu página web para información sobre un tatuaje.')}`}
+            href={`https://wa.me/${contactInfo.whatsapp.replace(/[^0-9]/g, '')}?text=${encodeURIComponent('Hola, te contacto desde la página web de Aeterum Ink Tattoo para información sobre un tatuaje.')}`}
             target="_blank"
             rel="noopener noreferrer"
             title="Escribir por WhatsApp"

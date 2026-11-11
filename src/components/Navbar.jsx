@@ -25,16 +25,16 @@ export function Navbar({ onOpenBooking, onOpenAdmin, appointmentsCount = 0 }) {
             <div className="relative w-8 h-8 sm:w-10 sm:h-10 flex items-center justify-center">
               <img 
                 src="/assets/gothic_cross_transparent.png" 
-                alt="Efra Tattos Emblem" 
+                alt="Aeterum Ink Tattoo Emblem" 
                 className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(255,255,255,0.4)] group-hover:scale-110 transition-transform duration-300" 
               />
             </div>
             <div className="flex flex-col">
               <span className="font-heading tracking-[0.25em] text-white text-base sm:text-lg font-bold uppercase leading-none group-hover:text-silver-100 transition-colors">
-                EFRA TATTOS
+                AETERUM
               </span>
               <span className="text-[9px] sm:text-[10px] tracking-[0.35em] text-silver-400 uppercase font-light mt-0.5">
-                INK TATTOO STUDIO
+                INK TATTOO
               </span>
             </div>
           </div>

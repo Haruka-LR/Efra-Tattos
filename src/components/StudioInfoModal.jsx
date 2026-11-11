@@ -24,7 +24,7 @@ export function StudioInfoModal({ isOpen, onClose, onOpenBooking, contactInfo })
             <span>Estudio Profesional</span>
           </div>
           <h2 className="font-heading text-xl sm:text-2xl text-white font-bold tracking-wider">
-            CONOCE EFRA TATTOS
+            CONOCE AETERUM INK TATTOO
           </h2>
           <p className="font-cormorant italic text-base sm:text-lg text-silver-400 mt-1">
             Donde la devoción por el detalle y el arte eterno se unen.
@@ -39,7 +39,7 @@ export function StudioInfoModal({ isOpen, onClose, onOpenBooking, contactInfo })
               Nuestra Filosofía
             </h3>
             <p>
-              Entendemos que cada tatuaje es un compromiso para toda la vida. Por ello, no hacemos tatuajes en serie: 
+              En Aeterum entendemos que cada tatuaje es un compromiso para toda la vida. Por ello, no hacemos tatuajes en serie: 
               cada cliente recibe un trato personalizado, bocetaje previo adaptado a la anatomía de su cuerpo y asesoría sincera sobre viabilidad, envejecimiento de la tinta y tamaño adecuado.
             </p>
           </div>

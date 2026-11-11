@@ -30,7 +30,7 @@ export function CatalogModal({ isOpen, onClose, onSelectTattoo, onBookTattoo, co
               <span>Catálogo Exclusivo de Piezas</span>
             </div>
             <h2 className="font-heading text-xl sm:text-2xl text-white font-bold tracking-wider mt-0.5">
-              GALERÍA & ESTILOS DE EFRA TATTOS
+              GALERÍA & ESTILOS DE AETERUM INK TATTOO
             </h2>
           </div>
 

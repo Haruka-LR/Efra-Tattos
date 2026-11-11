@@ -38,7 +38,7 @@ export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTa
 
   // Generate WhatsApp pre-formatted message
   const generateWhatsAppMessage = () => {
-    return `*SOLICITUD DE CITA - EFRA TATTOS*
+    return `*SOLICITUD DE CITA - AETERUM INK TATTOO*
 ---------------------------------------
 👤 *Cliente:* ${formData.name || 'No especificado'}
 📱 *Teléfono:* ${formData.phone || 'No especificado'}
@@ -49,13 +49,13 @@ export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTa
 📅 *Fecha preferida:* ${formData.preferredDate || 'Por coordinar'} a las ${formData.preferredTime || '16:00'} hrs
 💡 *Idea / Descripción:* ${formData.description || 'Consulta general'}
 ${formData.notes ? `📝 *Notas:* ${formData.notes}\n` : ''}---------------------------------------
-_Enviado desde el Gestor Web de Efra Tattos_`;
+_Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
   };
 
   // Generate Email subject and body
   const generateEmailData = () => {
-    const subject = `[CITA EFRA TATTOS] Solicitud de Cita - ${formData.name || 'Nuevo Cliente'}`;
-    const body = `Hola Efra,\n\nMe gustaría solicitar una cita para un tatuaje con los siguientes datos:\n\n` +
+    const subject = `[CITA AETERUM INK TATTOO] Solicitud de Cita - ${formData.name || 'Nuevo Cliente'}`;
+    const body = `Hola equipo de Aeterum Ink Tattoo,\n\nMe gustaría solicitar una cita para un tatuaje con los siguientes datos:\n\n` +
       `- Nombre: ${formData.name}\n` +
       `- Teléfono: ${formData.phone}\n` +
       `- Correo: ${formData.email}\n` +
@@ -66,7 +66,7 @@ _Enviado desde el Gestor Web de Efra Tattos_`;
       `- Fecha tentativa: ${formData.preferredDate} (${formData.preferredTime} hrs)\n` +
       `- Descripción: ${formData.description}\n` +
       `- Notas adicionales: ${formData.notes}\n\n` +
-      `Quedo en espera de tu respuesta para confirmar disponibilidad.\n\nSaludos.`;
+      `Quedo en espera de su respuesta para confirmar disponibilidad.\n\nSaludos.`;
     return { subject, body };
   };
 
@@ -174,7 +174,7 @@ _Enviado desde el Gestor Web de Efra Tattos_`;
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-white text-black hover:bg-silver-200 text-xs font-semibold uppercase tracking-wider"
                 >
                   <Phone className="w-4 h-4" />
-                  Llamar ahora a Efra
+                  Llamar ahora al estudio
                 </a>
               )}
               <button
@@ -196,7 +196,7 @@ _Enviado desde el Gestor Web de Efra Tattos_`;
                 <span>Gestor de Citas & Cotizaciones</span>
               </div>
               <h2 className="font-heading text-xl sm:text-2xl text-white font-bold tracking-wider">
-                AGENDA TU CITA CON EFRA TATTOS
+                AGENDA TU CITA CON AETERUM INK TATTOO
               </h2>
               <p className="text-xs sm:text-sm text-silver-400 mt-1">
                 Elige tu canal de contacto preferido (WhatsApp, correo o llamada directa) y envíanos los detalles de tu pieza.

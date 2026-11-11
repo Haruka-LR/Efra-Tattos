@@ -5,7 +5,7 @@ export function TattooDetailModal({ tattoo, onClose, onBookTattoo, contactInfo }
   if (!tattoo) return null;
 
   const handleWhatsAppQuote = () => {
-    const text = `*CONSULTA DE PIEZA - EFRA TATTOS*\n\nHola Efra, me encantó este trabajo de tu catálogo:\n- *Pieza:* ${tattoo.title}\n- *Estilo:* ${tattoo.style}\n- *Zona sugerida:* ${tattoo.recommendedZone}\n\n¿Podrías darme un costo estimado y disponibilidad para agendar?`;
+    const text = `*CONSULTA DE PIEZA - AETERUM INK TATTOO*\n\nHola, me encantó este trabajo de su catálogo:\n- *Pieza:* ${tattoo.title}\n- *Estilo:* ${tattoo.style}\n- *Zona sugerida:* ${tattoo.recommendedZone}\n\n¿Podrían darme un costo estimado y disponibilidad para agendar?`;
     const cleanPhone = contactInfo.whatsapp.replace(/[^0-9]/g, '');
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
   };

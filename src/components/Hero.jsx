@@ -31,10 +31,10 @@ export function Hero({ onOpenBooking }) {
           <span className="text-white/40 text-xs sm:text-sm tracking-[0.5em]">✦</span>
         </div>
 
-        {/* Main Title: EFRA TATTOS with metallic gothic aesthetic */}
+        {/* Main Title: AETERUM with metallic gothic aesthetic */}
         <div className="mb-4 sm:mb-6">
           <h1 className="font-gothic text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black tracking-[0.12em] text-white uppercase text-metallic drop-shadow-[0_5px_15px_rgba(0,0,0,0.9)]">
-            EFRA TATTOS
+            AETERUM
           </h1>
           <div className="flex items-center justify-center gap-3 mt-1 sm:mt-2">
             <span className="h-[1px] w-8 sm:w-16 bg-gradient-to-r from-transparent to-white/60"></span>

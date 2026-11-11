@@ -29,7 +29,7 @@ export function WhyChooseUs({ onOpenBooking, onOpenStudioInfo }) {
           <div className="lg:col-span-5 text-left space-y-6">
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl tracking-[0.18em] text-white uppercase font-bold leading-tight">
               ¿POR QUÉ <br className="hidden sm:inline" />
-              ELEGIR EFRA TATTOS?
+              ELEGIR AETERUM?
             </h2>
 
             <div className="space-y-4 text-silver-400 text-sm sm:text-base font-light leading-relaxed">
@@ -37,7 +37,7 @@ export function WhyChooseUs({ onOpenBooking, onOpenStudioInfo }) {
                 Más que un tatuaje, una experiencia.
               </p>
               <p>
-                En Efra Tattoos combinamos técnica, estilo y pasión para crear piezas únicas, 
+                En Aeterum combinamos técnica, estilo y pasión para crear piezas únicas, 
                 en un espacio seguro, cómodo y profesional. Cada trazo está pensado para perdurar con nitidez y fuerza a través de los años.
               </p>
             </div>
@@ -60,7 +60,7 @@ export function WhyChooseUs({ onOpenBooking, onOpenStudioInfo }) {
               <div className="absolute inset-0 bg-white/5 rounded-full blur-2xl group-hover:bg-white/10 transition-colors pointer-events-none" />
               <img
                 src="/assets/gothic_cross_transparent.png"
-                alt="Emblema Cruz Gótica Efra Tattos"
+                alt="Emblema Cruz Gótica Aeterum Ink Tattoo"
                 className="w-full h-auto object-contain filter drop-shadow-[0_0_25px_rgba(255,255,255,0.35)] transition-transform duration-700 group-hover:scale-105"
               />
             </div>

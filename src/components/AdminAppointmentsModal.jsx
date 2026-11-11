@@ -50,7 +50,7 @@ export function AdminAppointmentsModal({
   // Direct WhatsApp contact generator
   const handleOpenWhatsAppChat = (app) => {
     const cleanPhone = app.phone.replace(/[^0-9]/g, '');
-    const message = `Hola ${app.name}, te saludo desde *Efra Tattos*. 
+    const message = `Hola ${app.name}, te saludo desde *Aeterum Ink Tattoo*. 
 Te contacto respecto a tu solicitud de cita para tu *${app.service}* programada tentativamente para el día *${app.preferredDate}* a las *${app.preferredTime} hrs*.
 ¿Podemos confirmar tu asistencia o requieres ajustar el horario? Quedo a tus órdenes.`;
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
@@ -132,7 +132,7 @@ Te contacto respecto a tu solicitud de cita para tu *${app.service}* programada 
             </div>
             <div>
               <h2 className="font-heading text-lg sm:text-xl text-white font-bold tracking-wider">
-                PANEL DE GESTIÓN DE CITAS • EFRA TATTOS
+                PANEL DE GESTIÓN DE CITAS • AETERUM INK TATTOO
               </h2>
               <p className="text-[11px] text-silver-400">
                 Administra citas recibidas por WhatsApp, correo y llamadas en tiempo real.
