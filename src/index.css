@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background-color: #050506;
+  color: #d1d1d6;
+  font-family: 'Montserrat', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(30, 30, 36, 0.45) 0%, transparent 60%),
+    radial-gradient(circle at 100% 50%, rgba(20, 20, 25, 0.3) 0%, transparent 40%),
+    radial-gradient(circle at 0% 80%, rgba(25, 25, 30, 0.3) 0%, transparent 40%);
+  background-attachment: fixed;
+}
+
+/* Custom gothic metal silver text gradient */
+.text-metallic {
+  background: linear-gradient(180deg, #ffffff 0%, #d8d8e0 45%, #8f8f9e 75%, #4a4a55 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.8));
+}
+
+.text-silver-glow {
+  text-shadow: 0 0 15px rgba(220, 220, 235, 0.35);
+}
+
+/* Dark gothic glass card */
+.glass-gothic {
+  background: rgba(14, 14, 18, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-gothic:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+/* Star divider line */
+.divider-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  width: 100%;
+}
+.divider-ornament::before,
+.divider-ornament::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+}
