@@ -428,13 +428,36 @@ Te contacto respecto a tu solicitud de cita para tu *${app.service}* programada 
                   />
                 </div>
                 <div>
-                  <label className="block text-silver-300 mb-1">Hora</label>
-                  <input
-                    type="time"
+                  <label className="block text-silver-300 mb-1">Horario (9:00 AM a 6:00 PM)</label>
+                  <select
                     value={manualForm.preferredTime}
                     onChange={(e) => setManualForm({ ...manualForm, preferredTime: e.target.value })}
                     className="w-full bg-black/60 border border-white/15 rounded-xl px-3 py-2 text-white focus:outline-none focus:border-white/50"
-                  />
+                  >
+                    {[
+                      { value: '09:00', label: '09:00 AM' },
+                      { value: '10:00', label: '10:00 AM' },
+                      { value: '11:00', label: '11:00 AM' },
+                      { value: '12:00', label: '12:00 PM' },
+                      { value: '13:00', label: '01:00 PM' },
+                      { value: '14:00', label: '02:00 PM' },
+                      { value: '15:00', label: '03:00 PM' },
+                      { value: '16:00', label: '04:00 PM' },
+                      { value: '17:00', label: '05:00 PM' },
+                      { value: '18:00', label: '06:00 PM' },
+                    ].map(h => {
+                      const occupied = appointments.some(a => 
+                        a.status !== 'cancelada' && 
+                        a.preferredDate === manualForm.preferredDate && 
+                        (a.preferredTime === h.value || a.preferredTime.startsWith(h.value.split(':')[0]))
+                      );
+                      return (
+                        <option key={h.value} value={h.value}>
+                          {h.label} {occupied ? '— (Ya Reservado)' : '— (Disponible)'}
+                        </option>
+                      );
+                    })}
+                  </select>
                 </div>
               </div>
 
@@ -510,7 +533,7 @@ Te contacto respecto a tu solicitud de cita para tu *${app.service}* programada 
                   required
                   value={settingsForm.email}
                   onChange={(e) => setSettingsForm({ ...settingsForm, email: e.target.value })}
-                  placeholder="contacto@efratattoos.com"
+                  placeholder="contacto@aeterumtattoos.com"
                   className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-white/50"
                 />
               </div>
@@ -523,6 +546,28 @@ Te contacto respecto a tu solicitud de cita para tu *${app.service}* programada 
                   value={settingsForm.location}
                   onChange={(e) => setSettingsForm({ ...settingsForm, location: e.target.value })}
                   placeholder="Tizayuca, Hgo."
+                  className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-white/50"
+                />
+              </div>
+
+              <div>
+                <label className="block text-silver-300 mb-1">Enlace de Instagram</label>
+                <input
+                  type="url"
+                  value={settingsForm.instagram || ''}
+                  onChange={(e) => setSettingsForm({ ...settingsForm, instagram: e.target.value })}
+                  placeholder="https://www.instagram.com/aeterum_inktatto..."
+                  className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-white/50"
+                />
+              </div>
+
+              <div>
+                <label className="block text-silver-300 mb-1">Enlace de TikTok</label>
+                <input
+                  type="url"
+                  value={settingsForm.tiktok || ''}
+                  onChange={(e) => setSettingsForm({ ...settingsForm, tiktok: e.target.value })}
+                  placeholder="https://www.tiktok.com/@aeteruminktatto..."
                   className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-white focus:outline-none focus:border-white/50"
                 />
               </div>

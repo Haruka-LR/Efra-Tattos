@@ -1,8 +1,28 @@
 import React, { useState } from 'react';
-import { X, MessageCircle, Mail, Phone, Calendar, Clock, Image as ImageIcon, CheckCircle2, Sparkles, Send, ArrowRight } from 'lucide-react';
+import { X, MessageCircle, Mail, Phone, Calendar, Clock, Image as ImageIcon, CheckCircle2, Sparkles, Send, ArrowRight, AlertCircle } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTattoo, contactInfo }) {
+export const BUSINESS_HOURS = [
+  { value: '09:00', label: '09:00 AM' },
+  { value: '10:00', label: '10:00 AM' },
+  { value: '11:00', label: '11:00 AM' },
+  { value: '12:00', label: '12:00 PM' },
+  { value: '13:00', label: '01:00 PM' },
+  { value: '14:00', label: '02:00 PM' },
+  { value: '15:00', label: '03:00 PM' },
+  { value: '16:00', label: '04:00 PM' },
+  { value: '17:00', label: '05:00 PM' },
+  { value: '18:00', label: '06:00 PM' },
+];
+
+export function BookingModal({ 
+  isOpen, 
+  onClose, 
+  onSaveAppointment, 
+  preselectedTattoo, 
+  contactInfo,
+  existingAppointments = [] 
+}) {
   if (!isOpen) return null;
 
   const [channel, setChannel] = useState('whatsapp'); // 'whatsapp' | 'email' | 'call'
@@ -16,13 +36,48 @@ export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTa
     size: '12 x 8 cm',
     description: preselectedTattoo ? `Me interesa una pieza similar a "${preselectedTattoo.title}" (${preselectedTattoo.style}).` : '',
     preferredDate: '',
-    preferredTime: '16:00',
+    preferredTime: '',
     referenceImage: null,
     notes: '',
   });
 
+  const [timeWarning, setTimeWarning] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [generatedUrl, setGeneratedUrl] = useState('');
+
+  const todayDate = new Date().toISOString().split('T')[0];
+
+  // Normalizes any time representation to HH:00 format
+  const normalizeHour = (t) => {
+    if (!t) return '';
+    const clean = String(t).trim().split(' ')[0];
+    const parts = clean.split(':');
+    if (!parts[0]) return '';
+    const h = String(parseInt(parts[0], 10)).padStart(2, '0');
+    return `${h}:00`;
+  };
+
+  // Checks if a given time slot is already taken on a specific date
+  const isTimeOccupied = (timeValue, date = formData.preferredDate) => {
+    if (!date || !timeValue) return false;
+    const target = normalizeHour(timeValue);
+    return (existingAppointments || []).some((app) => {
+      if (app.status === 'cancelada') return false;
+      if (app.preferredDate !== date) return false;
+      return normalizeHour(app.preferredTime) === target;
+    });
+  };
+
+  // Date change handler to re-validate selected hour
+  const handleDateChange = (newDate) => {
+    setTimeWarning('');
+    if (formData.preferredTime && isTimeOccupied(formData.preferredTime, newDate)) {
+      setFormData(prev => ({ ...prev, preferredDate: newDate, preferredTime: '' }));
+      setTimeWarning('El horario que tenías seleccionado no está disponible en esta nueva fecha. Por favor elige uno disponible.');
+    } else {
+      setFormData(prev => ({ ...prev, preferredDate: newDate }));
+    }
+  };
 
   // Handle image upload preview
   const handleImageChange = (e) => {
@@ -38,6 +93,7 @@ export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTa
 
   // Generate WhatsApp pre-formatted message
   const generateWhatsAppMessage = () => {
+    const timeLabel = BUSINESS_HOURS.find(h => h.value === formData.preferredTime)?.label || formData.preferredTime || 'Por coordinar';
     return `*SOLICITUD DE CITA - AETERUM INK TATTOO*
 ---------------------------------------
 👤 *Cliente:* ${formData.name || 'No especificado'}
@@ -46,7 +102,7 @@ export function BookingModal({ isOpen, onClose, onSaveAppointment, preselectedTa
 🎨 *Servicio / Estilo:* ${formData.service} (${formData.style})
 📍 *Zona del cuerpo:* ${formData.bodyZone || 'A convenir'}
 📏 *Tamaño aprox:* ${formData.size || 'A convenir'}
-📅 *Fecha preferida:* ${formData.preferredDate || 'Por coordinar'} a las ${formData.preferredTime || '16:00'} hrs
+📅 *Fecha preferida:* ${formData.preferredDate || 'Por coordinar'} a las ${timeLabel}
 💡 *Idea / Descripción:* ${formData.description || 'Consulta general'}
 ${formData.notes ? `📝 *Notas:* ${formData.notes}\n` : ''}---------------------------------------
 _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
@@ -54,6 +110,7 @@ _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
 
   // Generate Email subject and body
   const generateEmailData = () => {
+    const timeLabel = BUSINESS_HOURS.find(h => h.value === formData.preferredTime)?.label || formData.preferredTime || 'Por coordinar';
     const subject = `[CITA AETERUM INK TATTOO] Solicitud de Cita - ${formData.name || 'Nuevo Cliente'}`;
     const body = `Hola equipo de Aeterum Ink Tattoo,\n\nMe gustaría solicitar una cita para un tatuaje con los siguientes datos:\n\n` +
       `- Nombre: ${formData.name}\n` +
@@ -63,7 +120,7 @@ _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
       `- Estilo: ${formData.style}\n` +
       `- Zona del cuerpo: ${formData.bodyZone}\n` +
       `- Medida aprox: ${formData.size}\n` +
-      `- Fecha tentativa: ${formData.preferredDate} (${formData.preferredTime} hrs)\n` +
+      `- Fecha tentativa: ${formData.preferredDate} a las ${timeLabel}\n` +
       `- Descripción: ${formData.description}\n` +
       `- Notas adicionales: ${formData.notes}\n\n` +
       `Quedo en espera de su respuesta para confirmar disponibilidad.\n\nSaludos.`;
@@ -72,6 +129,21 @@ _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!formData.preferredDate) {
+      alert('Por favor selecciona una fecha tentativa para tu cita.');
+      return;
+    }
+
+    if (!formData.preferredTime) {
+      alert('Por favor selecciona uno de los horarios disponibles (de 9:00 AM a 6:00 PM).');
+      return;
+    }
+
+    if (isTimeOccupied(formData.preferredTime, formData.preferredDate)) {
+      alert('El horario seleccionado ya no está disponible. Por favor elige otro horario.');
+      return;
+    }
 
     // Create appointment object
     const newAppointment = {
@@ -152,7 +224,7 @@ _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
             <div className="p-4 rounded-xl border border-white/10 bg-black/60 text-left max-w-md mx-auto text-xs space-y-1.5 text-silver-400">
               <p><strong className="text-white">Cliente:</strong> {formData.name}</p>
               <p><strong className="text-white">Servicio:</strong> {formData.service}</p>
-              <p><strong className="text-white">Fecha solicitada:</strong> {formData.preferredDate} a las {formData.preferredTime}</p>
+              <p><strong className="text-white">Fecha y Horario:</strong> {formData.preferredDate} a las {BUSINESS_HOURS.find(h => h.value === formData.preferredTime)?.label || formData.preferredTime}</p>
               <p><strong className="text-white">Medio elegido:</strong> {channel === 'whatsapp' ? 'WhatsApp Directo' : channel === 'email' ? 'Correo Electrónico' : 'Llamada Telefónica'}</p>
             </div>
 
@@ -332,31 +404,102 @@ _Enviado desde el Gestor Web de Aeterum Ink Tattoo_`;
                 </div>
               </div>
 
-              {/* Row 4: Date & Time Slot */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs text-silver-300 mb-1">Fecha Tentativa Preferida</label>
-                  <input
-                    type="date"
-                    required
-                    value={formData.preferredDate}
-                    onChange={(e) => setFormData({ ...formData, preferredDate: e.target.value })}
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-white/60"
-                  />
+              {/* Row 4: Date Picker */}
+              <div>
+                <label className="block text-xs text-silver-300 mb-1 flex items-center justify-between">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <Calendar className="w-3.5 h-3.5 text-silver-400" />
+                    <span>Fecha Tentativa Preferida *</span>
+                  </span>
+                  <span className="text-[10px] text-silver-400 font-light">
+                    Selecciona día para consultar disponibilidad
+                  </span>
+                </label>
+                <input
+                  type="date"
+                  required
+                  min={todayDate}
+                  value={formData.preferredDate}
+                  onChange={(e) => handleDateChange(e.target.value)}
+                  className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-white/60 [color-scheme:dark]"
+                />
+              </div>
+
+              {/* Row 5: Hourly Slots Selection (9:00 AM - 6:00 PM) */}
+              <div>
+                <div className="flex items-center justify-between mb-1.5">
+                  <label className="text-xs text-silver-300 flex items-center gap-1.5 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-silver-400" />
+                    <span>Horario de Cita (de 9:00 AM a 6:00 PM) *</span>
+                  </label>
+                  {formData.preferredDate && (
+                    <span className="text-[10px] text-silver-400 font-light">
+                      {BUSINESS_HOURS.filter(h => !isTimeOccupied(h.value)).length} de {BUSINESS_HOURS.length} disponibles
+                    </span>
+                  )}
                 </div>
-                <div>
-                  <label className="block text-xs text-silver-300 mb-1">Horario Preferido</label>
-                  <select
-                    value={formData.preferredTime}
-                    onChange={(e) => setFormData({ ...formData, preferredTime: e.target.value })}
-                    className="w-full bg-black/60 border border-white/15 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-white/60"
-                  >
-                    <option value="11:00">11:00 AM (Turno Mañana)</option>
-                    <option value="14:00">02:00 PM (Turno Mediodía)</option>
-                    <option value="16:00">04:00 PM (Turno Tarde)</option>
-                    <option value="18:00">06:00 PM (Turno Tarde/Noche)</option>
-                  </select>
-                </div>
+
+                {timeWarning && (
+                  <p className="text-[11px] text-amber-300 mb-2 bg-amber-950/40 border border-amber-500/30 rounded-xl px-3 py-1.5 flex items-center gap-1.5">
+                    <AlertCircle className="w-3.5 h-3.5 flex-shrink-0" />
+                    <span>{timeWarning}</span>
+                  </p>
+                )}
+
+                {!formData.preferredDate ? (
+                  <div className="p-3.5 rounded-xl border border-dashed border-white/15 bg-white/[0.02] text-center text-xs text-silver-400 flex items-center justify-center gap-2">
+                    <Calendar className="w-4 h-4 text-silver-500" />
+                    <span>Selecciona primero una fecha para consultar los horarios disponibles.</span>
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
+                      {BUSINESS_HOURS.map((hour) => {
+                        const occupied = isTimeOccupied(hour.value);
+                        const isSelected = formData.preferredTime === hour.value;
+
+                        return (
+                          <button
+                            key={hour.value}
+                            type="button"
+                            disabled={occupied}
+                            onClick={() => {
+                              setTimeWarning('');
+                              setFormData({ ...formData, preferredTime: hour.value });
+                            }}
+                            className={`p-2.5 rounded-xl border text-xs flex flex-col items-center justify-center transition-all ${
+                              occupied
+                                ? 'border-red-900/30 bg-red-950/20 text-neutral-500 cursor-not-allowed opacity-60'
+                                : isSelected
+                                  ? 'border-white bg-white text-black font-bold shadow-[0_0_15px_rgba(255,255,255,0.3)] ring-1 ring-white/60 scale-[1.02]'
+                                  : 'border-white/15 bg-black/60 text-silver-200 hover:border-white/40 hover:bg-white/5 hover:text-white'
+                            }`}
+                            title={occupied ? `El horario de las ${hour.label} ya está ocupado` : `Seleccionar horario ${hour.label}`}
+                          >
+                            <span className={`font-semibold tracking-wide ${occupied ? 'line-through decoration-red-500/70' : ''}`}>
+                              {hour.label}
+                            </span>
+                            <span className={`text-[9px] mt-0.5 tracking-wider uppercase font-medium ${
+                              occupied
+                                ? 'text-red-400'
+                                : isSelected
+                                  ? 'text-black font-semibold'
+                                  : 'text-emerald-400'
+                            }`}>
+                              {occupied ? '✕ No disponible' : isSelected ? '✓ Seleccionado' : 'Disponible'}
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {!formData.preferredTime && (
+                      <p className="text-[11px] text-silver-400 mt-1 italic">
+                        Haz clic en uno de los horarios marcados como <span className="text-emerald-400 font-medium">Disponible</span>.
+                      </p>
+                    )}
+                  </div>
+                )}
               </div>
 
               {/* Description & Reference Idea */}

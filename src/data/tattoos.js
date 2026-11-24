@@ -1,5 +1,68 @@
 // Catálogo de piezas de Aeterum Ink Tattoo
 export const initialTattoos = [
+  // --- Trabajos Reales Realizados por Efraín en Estudio ---
+  {
+    id: 101,
+    title: 'Tótem Tribal Tiki',
+    category: 'Black & Grey',
+    style: 'Tribal & Sombras Polinesias',
+    image: '/assets/efrain/totem_tiki.jpg',
+    description: 'Pieza de gran formato en antebrazo con tres niveles de máscaras tiki polinesias. Sombreado de volumen, contrastes profundos y detalles anatómicos.',
+    recommendedZone: 'Antebrazo / Manga',
+    approxSessions: '1 sesión (4 - 5 hrs)',
+    featured: true,
+    isRealWork: true,
+  },
+  {
+    id: 102,
+    title: 'Flor de Lirio & Destellos',
+    category: 'Fineline & Floral',
+    style: 'Línea Fina & Botánica',
+    image: '/assets/efrain/lirio_fineline.jpg',
+    description: 'Diseño botánico estilizado de flor de lirio con tallo fluido, hojas sombreadas y destellos estelares con técnica de aguja fineline.',
+    recommendedZone: 'Antebrazo o Pierna',
+    approxSessions: '1 sesión (2 - 3 hrs)',
+    featured: true,
+    isRealWork: true,
+  },
+  {
+    id: 103,
+    title: 'Follaje Botánico Nocturno',
+    category: 'Fineline & Floral',
+    style: 'Micro-sombreado & Botánica',
+    image: '/assets/efrain/botanico_pecho.jpg',
+    description: 'Rama botánica elegante adaptada a la anatomía de la clavícula y el pecho. Hojas sombreadas suavemente con transiciones de gris humo.',
+    recommendedZone: 'Clavícula, Costillas o Pecho',
+    approxSessions: '1 sesión (2 hrs)',
+    featured: true,
+    isRealWork: true,
+  },
+  {
+    id: 104,
+    title: 'Cráneo, Serpiente & Rosas',
+    category: 'Dark Fantasy',
+    style: 'Neotradicional & Dark Art',
+    image: '/assets/efrain/craneo_neotradicional.jpg',
+    description: 'Poderosa composición dark art que entrelaza un cráneo, víbora y rosas sombreadas, con líneas firmes y degradados intensos.',
+    recommendedZone: 'Muslo, Pantorrilla o Brazo',
+    approxSessions: '1 - 2 sesiones',
+    featured: true,
+    isRealWork: true,
+  },
+  {
+    id: 105,
+    title: 'Lettering "Soy De Amor"',
+    category: 'Letras & Flash',
+    style: 'Caligrafía Cursiva Fina',
+    image: '/assets/efrain/lettering_amor.jpg',
+    description: 'Tipografía personalizada a mano alzada en tinta negra pura, diseñada para seguir de forma armónica la silueta de la cadera.',
+    recommendedZone: 'Cadera, Costillas o Clavícula',
+    approxSessions: '1 sesión (1 hr)',
+    featured: true,
+    isRealWork: true,
+  },
+
+  // --- Diseños Emblemáticos del Estudio (Flyer Base) ---
   {
     id: 1,
     title: 'Ángel de Piedra',
@@ -9,7 +72,8 @@ export const initialTattoos = [
     description: 'Pieza de realismo inspirada en escultura clásica renacentista. Trabajo minucioso de luces, sombras y textura de mármol.',
     recommendedZone: 'Antebrazo o Pantorrilla',
     approxSessions: '1 - 2 sesiones',
-    featured: true,
+    featured: false,
+    isRealWork: false,
   },
   {
     id: 2,
@@ -20,7 +84,8 @@ export const initialTattoos = [
     description: 'Polilla de la muerte (Acherontia) con remates sagrados, puntillismo fino y estrellas de cuatro puntas.',
     recommendedZone: 'Antebrazo, Esternón o Muslo',
     approxSessions: '1 sesión',
-    featured: true,
+    featured: false,
+    isRealWork: false,
   },
   {
     id: 3,
@@ -31,7 +96,8 @@ export const initialTattoos = [
     description: 'Rosa silvestre con degradados oscuros de alto contraste y detalles orgánicos de hojas y espinas.',
     recommendedZone: 'Muñeca, Brazo o Cuello',
     approxSessions: '1 sesión',
-    featured: true,
+    featured: false,
+    isRealWork: false,
   },
   {
     id: 4,
@@ -42,7 +108,8 @@ export const initialTattoos = [
     description: 'Composición de cráneo anatómico envuelto en volutas de humo etéreo con contrastes profundos.',
     recommendedZone: 'Hombro, Bíceps o Espalda',
     approxSessions: '2 sesiones',
-    featured: true,
+    featured: false,
+    isRealWork: false,
   },
   {
     id: 5,
@@ -53,7 +120,8 @@ export const initialTattoos = [
     description: 'Cruz medieval con relieves ornamentales, terminaciones afiladas y sombreado sólido.',
     recommendedZone: 'Antebrazo, Pecho o Espalda',
     approxSessions: '1 sesión',
-    featured: true,
+    featured: false,
+    isRealWork: false,
   },
   {
     id: 6,
@@ -65,6 +133,7 @@ export const initialTattoos = [
     recommendedZone: 'Brazo completo',
     approxSessions: '2 - 3 sesiones',
     featured: false,
+    isRealWork: false,
   },
   {
     id: 7,
@@ -76,6 +145,7 @@ export const initialTattoos = [
     recommendedZone: 'Espalda o Pecho',
     approxSessions: '1 sesión',
     featured: false,
+    isRealWork: false,
   },
   {
     id: 8,
@@ -87,6 +157,7 @@ export const initialTattoos = [
     recommendedZone: 'Hombro / Manga',
     approxSessions: '2 sesiones',
     featured: false,
+    isRealWork: false,
   },
   {
     id: 9,
@@ -98,6 +169,7 @@ export const initialTattoos = [
     recommendedZone: 'Antebrazo o Muslo',
     approxSessions: '1 - 2 sesiones',
     featured: false,
+    isRealWork: false,
   },
   {
     id: 10,
@@ -109,5 +181,31 @@ export const initialTattoos = [
     recommendedZone: 'Pecho, Clavícula o Antebrazo',
     approxSessions: '1 sesión',
     featured: false,
+    isRealWork: false,
   }
+];
+
+// Fotos de proceso y autenticidad en el estudio
+export const studioProcessPhotos = [
+  {
+    id: 'proc-1',
+    title: 'Efraín en Sesión',
+    subtitle: 'El artista en acción',
+    image: '/assets/efrain/efrain_tatuando.jpg',
+    description: 'Concentración y precisión milimétrica durante el proceso de aplicación de tinta en piel.',
+  },
+  {
+    id: 'proc-2',
+    title: 'Trazo de Precisión',
+    subtitle: 'Aguja y pigmentación fina',
+    image: '/assets/efrain/detalle_aguja.jpg',
+    description: 'Detalle de la aguja estéril y la tensión perfecta de la piel para líneas limpias y nítidas.',
+  },
+  {
+    id: 'proc-3',
+    title: 'Instrumentación & Bioseguridad',
+    subtitle: 'Material estéril y desechable',
+    image: '/assets/efrain/maquina_tinta.jpg',
+    description: 'Pen rotativa inalámbrica encapsulada, caps sellados y tintas homologadas de máxima pureza.',
+  },
 ];

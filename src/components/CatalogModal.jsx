@@ -8,10 +8,14 @@ export function CatalogModal({ isOpen, onClose, onSelectTattoo, onBookTattoo, co
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [searchQuery, setSearchQuery] = useState('');
 
-  const categories = ['Todos', 'Realismo', 'Black & Grey', 'Dark Fantasy', 'Ornamental', 'Letras & Flash'];
+  const categories = ['Todos', 'Obras Reales', 'Black & Grey', 'Fineline & Floral', 'Dark Fantasy', 'Realismo', 'Letras & Flash'];
 
   const filtered = initialTattoos.filter((t) => {
-    const matchesCategory = selectedCategory === 'Todos' || t.category === selectedCategory;
+    const matchesCategory = selectedCategory === 'Todos' 
+      ? true 
+      : selectedCategory === 'Obras Reales'
+        ? t.isRealWork
+        : t.category === selectedCategory;
     const matchesSearch = t.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           t.style.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           t.description.toLowerCase().includes(searchQuery.toLowerCase());
@@ -96,6 +100,12 @@ export function CatalogModal({ isOpen, onClose, onSelectTattoo, onBookTattoo, co
                 <div className="absolute top-2.5 left-2.5 px-2.5 py-1 rounded-full bg-black/75 backdrop-blur-md border border-white/10 text-[10px] uppercase tracking-wider text-silver-300">
                   {tattoo.category}
                 </div>
+                {tattoo.isRealWork && (
+                  <div className="absolute top-2.5 right-2.5 px-2.5 py-1 rounded-full bg-emerald-950/85 backdrop-blur-md border border-emerald-500/40 text-[10px] uppercase tracking-wider text-emerald-300 font-semibold flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span>Real</span>
+                  </div>
+                )}
                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                   <span className="px-4 py-2 rounded-full bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs flex items-center gap-1.5">
                     <Eye className="w-4 h-4" /> Ver Detalles

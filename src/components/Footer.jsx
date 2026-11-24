@@ -34,10 +34,11 @@ export function Footer({ onOpenBooking, contactInfo }) {
           <div className="lg:col-span-1 flex items-center gap-4 text-silver-300">
             {/* Instagram */}
             <a
-              href="https://instagram.com"
+              href={contactInfo?.instagram || "https://www.instagram.com/aeterum_inktatto?fqnt=MWFya3c2Zmp0N25pMA%3D%3D&utm_source=qr"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
+              title="Instagram: @aeterum_inktatto"
               className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:text-white hover:border-white/50 transition-all hover:scale-110"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round">
@@ -49,10 +50,11 @@ export function Footer({ onOpenBooking, contactInfo }) {
             
             {/* TikTok */}
             <a
-              href="https://tiktok.com"
+              href={contactInfo?.tiktok || "https://www.tiktok.com/@aeteruminktatto?_r=1&_t=ZS-9ALSSsGuhGe"}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="TikTok"
+              title="TikTok: @aeteruminktatto"
               className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center hover:text-white hover:border-white/50 transition-all hover:scale-110"
             >
               <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">

@@ -18,16 +18,28 @@ import { MessageCircle, Phone, Calendar, Image as ImageIcon, Sparkles } from 'lu
 export default function App() {
   // Contact Information state (customizable via Admin Panel)
   const [contactInfo, setContactInfo] = useState(() => {
-    const saved = localStorage.getItem('aeterum_contact') || localStorage.getItem('efra_tattos_contact');
-    if (saved) {
-      try { return JSON.parse(saved); } catch (e) { }
-    }
-    return {
+    const defaultInfo = {
       whatsapp: '+52 779 172 8192',
       callPhone: '+52 779 172 8192',
       email: 'contacto@aeterumtattoos.com',
       location: 'Tizayuca, Hgo.',
+      instagram: 'https://www.instagram.com/aeterum_inktatto?fqnt=MWFya3c2Zmp0N25pMA%3D%3D&utm_source=qr',
+      tiktok: 'https://www.tiktok.com/@aeteruminktatto?_r=1&_t=ZS-9ALSSsGuhGe',
+      facebook: 'https://facebook.com',
     };
+    const saved = localStorage.getItem('aeterum_contact') || localStorage.getItem('efra_tattos_contact');
+    if (saved) {
+      try { 
+        const parsed = JSON.parse(saved);
+        return { 
+          ...defaultInfo, 
+          ...parsed, 
+          instagram: parsed.instagram || defaultInfo.instagram,
+          tiktok: parsed.tiktok || defaultInfo.tiktok
+        }; 
+      } catch (e) { }
+    }
+    return defaultInfo;
   });
 
   // Appointments state with persistence in localStorage
@@ -174,6 +186,7 @@ export default function App() {
         onSaveAppointment={handleSaveAppointment}
         preselectedTattoo={preselectedTattoo}
         contactInfo={contactInfo}
+        existingAppointments={appointments}
       />
 
       {/* 2. Catálogo Interactivo Completo */}

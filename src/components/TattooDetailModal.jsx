@@ -30,8 +30,15 @@ export function TattooDetailModal({ tattoo, onClose, onBookTattoo, contactInfo }
             alt={tattoo.title}
             className="w-full h-full object-cover md:object-contain filter contrast-110"
           />
-          <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] uppercase tracking-wider text-silver-200">
-            {tattoo.category}
+          <div className="absolute top-4 left-4 flex items-center gap-2">
+            <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/15 text-[10px] uppercase tracking-wider text-silver-200">
+              {tattoo.category}
+            </span>
+            {tattoo.isRealWork && (
+              <span className="px-2.5 py-1 rounded-full bg-emerald-950/85 backdrop-blur-md border border-emerald-500/40 text-[10px] uppercase tracking-wider text-emerald-300 font-semibold">
+                ✓ Trabajo Real en Estudio
+              </span>
+            )}
           </div>
         </div>
 
